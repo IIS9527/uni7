@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- head 中 -->
+    <link rel="stylesheet" href="css/materialize.min.css">
+
+
+    <title>环境设置</title>
+</head>
+<body style="padding: 20px">
+
+<div class="card-panel">
+    <span class="blue-text text-darken-2" id="service">运行模式</span>
+</div>
+<div>
+    <div>运行模式</div>
+    <p>
+        <label>
+            <input name="radio1" class="with-gap" type="radio" checked id="agent" />
+            <span>代理模式</span>
+        </label>
+
+        <label>
+            <input name="radio1" class="with-gap" type="radio" id="accModel" />
+            <span>无障碍</span>
+        </label>
+
+    </p>
+</div>
+
+<div class="ui-form-item ui-form-item-switch ui-border-b">
+    <p>
+        服务状态
+    </p>
+    <div class="switch">
+        <label>
+            关闭
+            <input type="checkbox" id="serviceOk">
+            <span class="lever"></span>
+            开启
+        </label>
+    </div>
+</div>
+<br/>
+
+<div class="" style="padding: 5px">
+    <a class="waves-effect waves-light btn" onclick="openEnv()">启动环境</a>
+</div>
+
+
+<div class="switch">
+    <p>
+        悬浮窗权限
+    </p>
+    <label>
+        关闭
+        <input type="checkbox" id="floatView">
+        <span class="lever"></span>
+        开启
+    </label>
+</div>
+<br/>
+<div class="" style="padding: 5px">
+    <a class="waves-effect waves-light btn" onclick="floatViewPermission()">开启悬浮窗权限</a>
+</div>
+<div>----------------打开app初始化---------------</div>
+<div class="row">
+
+    <div class="col s3">
+        <button class="btn waves-effect waves-light " type="button" name="action" onclick="javascript:window.ec.call('startApp','com.ss.android.article.video')">西瓜初始化
+        </button>
+    </div>
+    <div class="col s3">
+        <button class="btn waves-effect waves-light" type="button" name="action" onclick="javascript:window.ec.call('startApp','com.ss.android.article.news')">头条初始化
+        </button>
+    </div>
+    <div class="col s3">
+        <button class="btn waves-effect waves-light" type="button" name="action" onclick="javascript:window.ec.call('startApp','com.xs.fm')">番茄初始化
+        </button>
+    </div>
+</div>
+
+
+
+
+<!-- body 最后 -->
+<script src="htmljs/jquery.min.js"></script>
+<script src="htmljs/materialize.min.js"></script>
+
+
+</body>
+
+
+<script>
+    function start(){
+
+
+
+    }
+
+
+
+    $(function () {
+
+        var serviceMode = window.ec.isAccMode() ? "无障碍服务" : "代理服务";
+
+        $("#service").text("运行模式: " + serviceMode);
+
+        var type1 = window.ec.isAgentMode();
+        console.log(type1)
+        if (type1 == "true") {
+            $("#agent").attr("checked", "checked");
+        }
+        var type2 = window.ec.isAccMode();
+        if (type2 == "true") {
+            $('#accModel').attr("checked", "checked");
+
+        }
+
+        console.log(type2)
+
+        var serviceOk = false;
+
+        if (window.ec.isAccMode()) {
+            serviceOk = window.ec.isAccServiceOk();
+        } else {
+            serviceOk = window.ec.isAgentServiceOk();
+        }
+        if (serviceOk) {
+            $("#serviceOk").prop("checked", true);
+        } else {
+            $("#serviceOk").prop("checked", false);
+        }
+
+        var r2 = window.ec.hasFloatViewPermission();
+
+        $("#floatView").prop("checked", r2);
+
+    });
+
+
+
+
+
+
+
+    function openEnv() {
+        window.ec.setECSystemConfig({
+            "log_float_window":"是",
+        });
+        window.ec.saveConfig("agentOrAcc", $("#agent").prop("checked"));
+        let agent = window.ec.getConfig("agentOrAcc")+'';
+        // window.ec.toast(agent);
+        if (agent === "true") {
+            $("#agent").attr("checked", "checked");
+
+
+            window.ec.call('activeSelf',null)
+
+            window.ec.setRunningMode(1);
+
+            window.ec.toast("代理模式");
+            console.log(1)
+        }
+        else {
+            $('#accModel').attr("checked", "checked");
+            window.ec.setRunningMode(2);
+            window.ec.toast("无障碍模式");
+        }
+
+        // window.ec.toast(acc);
+        let serviceMode = window.ec.isAccMode() ? "无障碍服务" : "代理服务";
+        let ok =  window.ec.startEnv()
+        $("#service").text("运行模式: " + serviceMode);
+        $("#serviceOk").prop("checked",ok);
+
+    }
+
+    function floatViewPermission() {
+        var r = window.ec.requestFloatViewPermission(100);
+        $("#floatView").prop("checked", r);
+        window.ec.toast("开启选浮窗权限:" + r);
+    }
+
+
+</script>
+
+</html>

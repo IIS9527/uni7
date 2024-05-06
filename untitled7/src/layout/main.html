@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- head 中 -->
+    <link rel="stylesheet" href="css/materialize.min.css">
+
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <title>H5 网页示例</title>
+</head>
+<body style="margin-left: 10px;margin-right: 10px">
+
+<div class="card-panel">
+    <span class="card-title" id="baseInfo">基本信息</span>
+    <div class="row s12 ">
+        <div class="input-field  inline col s4">
+            <input id="cardNo" type="text" class="validate">
+            <label for="cardNo">账号</label>
+        </div>
+
+        <div class="input-field  inline col s4">
+            <input id="password" type="text" class="validate">
+            <label for="password">密码</label>
+        </div>
+
+        <div class="input-field inline col s4">
+            <input id="deviceNickName" type="text" class="validate">
+            <label for="deviceNickName">机器名称</label>
+        </div>
+
+        <div class="input-field inline col s10">
+            <input id="personAddress" type="text" class="validate">
+            <label for="personAddress">主页链接</label>
+        </div>
+
+    </div>
+</div>
+
+<div>
+    <div>-----------------------------应用设置---------------------------</div>
+    <p>
+        <label>
+            <input name="radio" class="with-gap" type="radio" checked id="one" value="6822"/>
+            <span>头条</span>
+        </label>
+
+        <label>
+            <input name="radio" class="with-gap" type="radio" id="two" value="247160"/>
+            <span>西瓜</span>
+        </label>
+
+        <label>
+            <input class="with-gap" name="radio" type="radio" id="three" value="6016"/>
+            <span>番茄</span>
+        </label>
+    </p>
+</div>
+<div>
+    <div>-----------------------------方式设置---------------------------</div>
+    <div>----------直接_1-3---------</div>
+    <p>
+        <label>
+            <input name="radio1" class="with-gap" type="radio" checked id="type4" />
+            <span>方式1</span>
+        </label>
+        <label>
+            <input name="radio1" class="with-gap" type="radio"  id="type3"/>
+            <span>方式3</span>
+        </label>
+    </p>
+    <div>----------浏览器-2-4-------</div>
+    <p>
+        <label>
+            <input name="radio1" class="with-gap" type="radio"  id="type5" />
+            <span>方式2</span>
+        </label>
+
+        <label>
+            <input name="radio1" class="with-gap" type="radio"  id="type1" />
+            <span>方式4</span>
+        </label>
+
+    </p>
+
+    <div>----------搜索5----------</div>
+    <p>
+        <label>
+            <input name="radio1" class="with-gap" type="radio"  id="type6" />
+            <span>方式5</span>
+        </label>
+
+    </p>
+    <div>----------作品6----------</div>
+    <label>
+        <input name="radio1" class="with-gap" type="radio"  id="type7" />
+        <span>方式6</span>
+    </label>
+
+
+<!--    <p>-->
+<!--        <label>-->
+<!--            <input name="radio1" class="with-gap" type="radio" checked id="type4" />-->
+<!--            <span>方式1</span>-->
+<!--        </label>-->
+<!--        <label>-->
+<!--            <input name="radio1" class="with-gap" type="radio"  id="type5" />-->
+<!--            <span>方式2</span>-->
+<!--        </label>-->
+<!--        <label>-->
+<!--            <input name="radio1" class="with-gap" type="radio"  id="type3"/>-->
+<!--            <span>方式3</span>-->
+<!--        </label>-->
+
+<!--        <label>-->
+<!--            <input name="radio1" class="with-gap" type="radio"  id="type1" />-->
+<!--            <span>方式4</span>-->
+<!--        </label>-->
+
+<!--        <label>-->
+<!--            <input name="radio1" class="with-gap" type="radio"  id="type6" />-->
+<!--            <span>方式5</span>-->
+<!--        </label>-->
+<!--    </p>-->
+</div>
+
+
+
+<br/>
+
+<div class="row">
+
+    <div class="col s6">
+        <button class="btn waves-effect waves-light " type="button" name="action" onclick="javascript:save()">保存参数
+        </button>
+    </div>
+    <div class="col s6">
+        <button class="btn waves-effect waves-light" type="button" name="action" onclick="javascript:window.ec.start()">
+            启动脚本
+        </button>
+    </div>
+</div>
+<script src="htmljs/jquery.min.js"></script>
+
+<script src="htmljs/materialize.min.js"></script>
+
+</body>
+<script>
+
+    $(function () {
+
+
+        //使用jquery进行设置值
+        //取参数并且进行设置得
+
+        $("#baseInfo").text( "基本信息:"+window.ec.call("getVersion", null));
+
+
+        window.ec.saveConfig("version",window.ec.call("getVersion", null)+'')
+
+        var cardNo = window.ec.getConfig("cardNo");
+        $("#cardNo").val(cardNo);
+
+
+        var password = window.ec.getConfig("password");
+        $("#password").val(password);
+
+        var personAddress = window.ec.getConfig("personAddress");
+        $("#personAddress").val(personAddress);
+
+        var deviceNickName = window.ec.getConfig("deviceNickName");
+        $("#deviceNickName").val(deviceNickName);
+
+// APP_ID
+// 头条6822
+// 西瓜247160
+// 番茄 6016
+
+
+        var one = window.ec.getConfig("one");
+        if (one === "true") {
+            $("#one").attr("checked", "checked");
+
+        }
+
+        var two = window.ec.getConfig("two");
+        if (two === "true") {
+
+            $("#two").attr("checked", "checked");
+
+        }
+        var three = window.ec.getConfig("three");
+        if (three === "true") {
+            $("#three").attr("checked", "checked");
+
+        }
+
+        var type1 = window.ec.getConfig("type1");
+        if (type1 === "true") {
+            $("#type1").attr("checked", "checked");
+
+        }
+
+        var type2 = window.ec.getConfig("type2");
+        if (type2 === "true") {
+            $("#type2").attr("checked", "checked");
+
+        }
+
+        var type3 = window.ec.getConfig("type3");
+        if (type3 === "true") {
+
+            $("#type3").attr("checked", "checked");
+
+        }
+
+        var type4 = window.ec.getConfig("type4");
+        if (type4 === "true") {
+            $("#type4").attr("checked", "checked");
+        }
+
+        var type5 = window.ec.getConfig("type5");
+        if (type5 === "true") {
+            $("#type5").attr("checked", "checked");
+        }
+
+        var type6 = window.ec.getConfig("type6");
+        if (type6 === "true") {
+            $("#type6").attr("checked", "checked");
+        }
+        var type7 = window.ec.getConfig("type7");
+        if (type7 === "true") {
+            $("#type7").attr("checked", "checked");
+        }
+
+
+        var music = window.ec.getConfig("music");
+        if (music === "true") {
+            $("#music").attr("checked", "checked");
+        }
+
+        var sing = window.ec.getConfig("sing");
+        if (sing === "true") {
+            $("#sing").attr("checked", "checked");
+        }
+
+        var dance = window.ec.getConfig("dance");
+        if (dance === "true") {
+            $("#dance").attr("checked", "checked");
+        }
+
+        var sex = window.ec.getConfig("sex");
+        $("select[name=sex]").find("option[value='" + sex + "']").attr("selected", true);
+
+
+        $('select').formSelect();
+        $('.datepicker').datepicker({"format": "yyyy-mm-dd"});
+        window.ec.hideStartBtn();
+    });
+
+
+    //保存参数的函数
+    function save() {
+
+
+
+
+
+        var password = $("#password").val();
+        window.ec.saveConfig("password", password);
+
+
+        var cardNo = $("#cardNo").val();
+        window.ec.saveConfig("cardNo", cardNo);
+
+
+        var personAddress = $("#personAddress").val();
+        window.ec.saveConfig("personAddress", personAddress);
+
+        var deviceNickName = $("#deviceNickName").val()
+        window.ec.saveConfig("deviceNickName", deviceNickName);
+
+
+
+        window.ec.saveConfig("one", $("#one").prop("checked"));
+        var one = window.ec.getConfig("one");
+        if (one === "true") {
+            $("#one").attr("checked", "checked");
+            window.ec.saveConfig("appId",6822)
+            window.ec.saveConfig("appName","toutiao")
+            console.log("保存参数成功")
+        }
+
+        window.ec.saveConfig("two", $("#two").prop("checked"));
+        var two = window.ec.getConfig("two");
+        if (two === "true") {
+            $("#two").attr("checked", "checked");
+            console.log("保存参数成功")
+            window.ec.saveConfig("appId",247160)
+            window.ec.saveConfig("appName","xigua")
+        }
+
+        window.ec.saveConfig("three", $("#three").prop("checked"));
+        var three = window.ec.getConfig("three");
+        if (three === "true") {
+            $("#three").attr("checked", "checked");
+            window.ec.saveConfig("appId",6106)
+            window.ec.saveConfig("appName","fanqie")
+            console.log("保存参数成功")
+        }
+
+        window.ec.saveConfig("type1", $("#type1").prop("checked"));
+        var type1 = window.ec.getConfig("type1");
+        if (type1 === "true") {
+            $("#type1").attr("checked", "checked");
+            window.ec.saveConfig("openType",1)
+            console.log("保存参数成功")
+        }
+
+        window.ec.saveConfig("type2", $("#type2").prop("checked"));
+        var type2 = window.ec.getConfig("type2");
+        if (type2 === "true") {
+            $("#type2").attr("checked", "checked");
+            window.ec.saveConfig("openType",2)
+            console.log("保存参数成功")
+        }
+
+        window.ec.saveConfig("type3", $("#type3").prop("checked"));
+        var type3 = window.ec.getConfig("type3");
+        if (type3 === "true") {
+            $("#type3").attr("checked", "checked");
+            window.ec.saveConfig("openType",3)
+            console.log("保存参数成功")
+        }
+        window.ec.saveConfig("type4", $("#type4").prop("checked"));
+        var type4 = window.ec.getConfig("type4");
+        if (type4 === "true") {
+            $("#type4").attr("checked", "checked");
+            window.ec.saveConfig("openType",4)
+            console.log("保存参数成功")
+
+        }
+
+
+        window.ec.saveConfig("type5", $("#type5").prop("checked"));
+        var type5 = window.ec.getConfig("type5");
+        if (type5 === "true") {
+            $("#type5").attr("checked", "checked");
+            window.ec.saveConfig("openType",5)
+            console.log("保存参数成功")
+        }
+
+        window.ec.saveConfig("type6", $("#type6").prop("checked"));
+        var type6 = window.ec.getConfig("type6");
+        if (type6 === "true") {
+            $("#type6").attr("checked", "checked");
+            window.ec.saveConfig("openType",6)
+            console.log("保存参数成功")
+        }
+        window.ec.saveConfig("type7", $("#type7").prop("checked"));
+        var type7 = window.ec.getConfig("type7");
+        if (type7 === "true") {
+            $("#type7").attr("checked", "checked");
+            window.ec.saveConfig("openType",7)
+            console.log("保存参数成功")
+        }
+
+        window.ec.toast("保存成功");
+
+
+    }
+
+</script>
+</html>

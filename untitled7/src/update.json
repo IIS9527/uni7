@@ -1,0 +1,8 @@
+{
+  "update_url": "http://kpidc.top:8999/update/getUpdateECVersion",
+  "version": "1.8.39",
+  "timeout": 10000
+}
+
+
+
