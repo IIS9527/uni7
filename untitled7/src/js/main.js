@@ -46,10 +46,11 @@ var myCome = null  // xx来了
 // const GlobAddress=  "http://192.168.0.100:8999"
 // const GlobAddress1=  "http://192.168.0.100:8999"
 // const GlobAddress2=  "http://192.168.0.100:8999"
-const GlobAddress=  "http://kpidc.top:8999"
-const GlobAddress1=  "http://kpidc.top:8999"
+// const GlobAddress=  "http://kpidc.top:8999"
+const GlobAddress=  "https://work.spbigidc.net:9100"
+const GlobAddress1=  "https://work.spbigidc.net:9100"
 // const GlobAddress1=  "http://23.224.174.155:8999"
-const GlobAddress2=  "http://kpidc.top:8999"
+const GlobAddress2=  "https://work.spbigidc.net:9100"
 // const GlobAddress2=  "http://nb.keep-work.com"
 
 var checkTimes = 1

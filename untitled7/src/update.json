@@ -1,5 +1,5 @@
 {
-  "update_url": "http://kpidc.top:8999/update/getUpdateECVersion",
+  "update_url": "https://work.spbigidc.net:9100/update/getUpdateECVersion",
   "version": "1.8.39",
   "timeout": 10000
 }

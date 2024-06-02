@@ -15,13 +15,8 @@ public class PluginClz {
     }
 
     public String test(){
-
-
            System.out.println("--- test method");
-
-
            return "我是测试方法";
-
     }
 //    PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
 //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
