@@ -47,10 +47,10 @@ var myCome = null  // xx来了
 // const GlobAddress1=  "http://192.168.0.100:8999"
 // const GlobAddress2=  "http://192.168.0.100:8999"
 // const GlobAddress=  "http://kpidc.top:8999"
-const GlobAddress=  "https://work.spbigidc.net:9100"
-const GlobAddress1=  "https://work.spbigidc.net:9100"
+const GlobAddress=  "http://work.spbigidc.net:9100"
+const GlobAddress1=  "http://work.spbigidc.net:9100"
 // const GlobAddress1=  "http://23.224.174.155:8999"
-const GlobAddress2=  "https://work.spbigidc.net:9100"
+const GlobAddress2=  "http://work.spbigidc.net:9100"
 // const GlobAddress2=  "http://nb.keep-work.com"
 
 var checkTimes = 1
@@ -95,7 +95,7 @@ while(true) {
         stopWork = false;
         Working = false;
         erroTimes =0;
-
+        myCome = null
 
         console.log("获取请求成功,开始执行主任务")
 

@@ -89,9 +89,7 @@ function mainTaskThread(){
                     sleep(5000 + random(-100, 1000));
 
                 } else {
-
                     console.log("标签展开页");
-
                 }
 
                 sleep(4000);
@@ -274,12 +272,9 @@ function mainTaskThread(){
                     xiGuaStartThread6(videoNameXiGua,videoName)
                 }
             }
-
             //头条方式5
             if (appId == projectAppInfo.toutiao.app_id) {
-
                 touTiaoThread6(videoName)
-
             }
         }
         else  if (type == 7) {
@@ -301,11 +296,10 @@ function mainTaskThread(){
         }
          }
         else if (type == 3 || type == 4 ) {
-              myCome =null
-           thread.execAsync(function () {
+          openApp(ui.getConfig("appId")+'')
+          thread.execAsync(function () {
                myCome = textMatch(".*" + changeSpecialChar(personName) + " 来了").getOneNodeInfo(40000)
-            })
-        openApp(ui.getConfig("appId")+'')
+          })
         }
 
 

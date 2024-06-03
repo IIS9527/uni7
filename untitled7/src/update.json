@@ -1,6 +1,6 @@
 {
   "update_url": "https://work.spbigidc.net:9100/update/getUpdateECVersion",
-  "version": "1.8.39",
+  "version": "1.8.43",
   "timeout": 10000
 }
 

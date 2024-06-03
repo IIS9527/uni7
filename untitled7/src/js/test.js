@@ -62,3 +62,10 @@
 //         console.log("点击允许2");
 //     }
 // }
+
+var myCome= null
+myCome =null
+thread.execAsync(function () {
+    myCome = textMatch("易点云测")})
+sleep(10000)
+console.log(myCome);
