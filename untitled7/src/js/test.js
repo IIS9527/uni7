@@ -63,9 +63,9 @@
 //     }
 // }
 
-var myCome= null
-myCome =null
-thread.execAsync(function () {
-    myCome = textMatch("易点云测")})
-sleep(10000)
-console.log(myCome);
+// var myCome= null
+// myCome =null
+// thread.execAsync(function () {
+//     myCome = textMatch("易点云测")})
+// sleep(10000)
+// console.log(myCome);

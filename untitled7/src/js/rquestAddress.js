@@ -98,7 +98,7 @@ function getTask(){
 
 
 
-    p.mid = utils.dataMd5(p.cardNo+p.personName+p.time+p.deviceId+p.deviceNickName+"sb1314520sbNB$HHHH")
+    p.mid = utils.dataMd5(p.cardNo+p.personName+p.time+p.deviceId+p.deviceNickName+"sb1314520sbNB$HHHHH")
 
 
 
