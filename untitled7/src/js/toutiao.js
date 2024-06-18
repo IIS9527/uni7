@@ -329,17 +329,12 @@ function touTiaoThread7_1(personName,videoName,dieTime,videoNameTouTiao){
                         ui.showLogWindow();
                         sleep(2000);
                         exit();
-
                         }
                 }
             }
-
         }
-
         //操作失败，找不到对应直播间
         loge("找不到直播间，未知错误")
     }
     //不在指定直播间
-
-
 }

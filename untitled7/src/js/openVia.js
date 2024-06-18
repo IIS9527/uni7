@@ -2,7 +2,7 @@
 
 
 function openVia(roomAddress){
-
+    let node1 =null;
     let Activity = {
         "chrome": "com.android.chrome/com.google.android.apps.chrome.IntentDispatcher",
         "360": "com.qihoo.browser/.BrowserActivity",
@@ -13,51 +13,29 @@ function openVia(roomAddress){
         "UC": "com.UCMobile/com.uc.browser.InnerUCMobile",
         "via":"mark.via/mark.via.Shell"
     };
-
     let a = appoint_browser(roomAddress, "via");
-    if (!a) {
-     console.log("打开页面错误");
-     return false;
-    }
+    if (!a) {console.log("打开页面错误");return false;}
 
-    let c=  text("确定").getOneNodeInfo(1000);
-    if (c) {
-        c.click()
-    }
-
+    node1=  text("确定").getOneNodeInfo(1000);
+    if (node1) {node1.click()}
     sleep(5000);
-
-    let node3_1=  text("直播已结束").getOneNodeInfo(5000);
-    if (node3_1) {
+    node1=  text("直播已结束").getOneNodeInfo(5000);
+    if (node1) {
         console.log("直播链接结束")
         videoDieOut = true
         return false;
     }
 
-    let node3 = textMatch(".*打开看看.*").getOneNodeInfo(20000);
-    if (node3) {
-            node3.click();
-        }
-        else {
-            toast("无节点");
-            console.log("s无节点")
-            return false;
-        }
+    node1 = textMatch(".*打开看看.*").getOneNodeInfo(20000);
+    if (node1) {node1.click();}
+    else {toast("无节点");console.log("s无节点");return false;}
 
-    // sleep(1000)
-    let node4= text("确定").getOneNodeInfo(3000);
+    node1= text("确定").getOneNodeInfo(3000);
+    if (node1) {node1.click();}
 
-    if (node4) {
-        node4.click();
-    }
-
-    let node5= text("允许").getOneNodeInfo(1000);
-    if (node5) {
-        node5.click();
-    }
-    else {
-        toast("无需点允许");
-    }
+    node1= text("允许").getOneNodeInfo(1000);
+    if (node1) {node1.click();}
+    else {toast("无需点允许");}
 
     return true;
 }
@@ -125,17 +103,14 @@ function openApp(appId){
         utils.openActivity(map);
         sleep(1000);
     }
-
     if (appId == projectAppInfo.fanqie.app_id) {
         let map={
             "uri":"novelfm3040://live_room?_t=&enable_replay=&enter_from=app_live&enter_method=app&host=aweme&page_launch_mode=clear_top_to_first&page_router_tag=live_homepage&room_id="+ui.getConfig("roomId")+"&",
             // "uri":"novelfm3040://live_room?host=aweme&room_id="+ui.getConfig("roomId"),
         };
-
         utils.openActivity(map);
         sleep(1000);
     }
-
     if (appId == projectAppInfo.toutiao.app_id) {
         let map={
             "uri":"snssdk141://webcast_room?_t=&action_type=click&enter_from_merge=app_live&enter_method=app&host=aweme&room_id="+ui.getConfig("roomId")+"&",
@@ -146,11 +121,6 @@ function openApp(appId){
 
 
     }
-
-
-    let node = textMatch("确定|允许").getOneNodeInfo(1000)
-    if (node) {
-        node.click()
-    }
-
+    node1= textMatch("确定|允许").getOneNodeInfo(1000)
+    if (node1) {node1.click()}
 }

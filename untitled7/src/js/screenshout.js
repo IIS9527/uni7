@@ -14,18 +14,16 @@ function autoRequestScreenCapture() {
             "auto_click_request_dialog":true
         }
     );
-
-    let request =null
+    let request =null;
     if (isAgentMode()) {
          request = image.requestScreenCapture(10000,1);
     }
     else {
-         request = image.requestScreenCapture(10000,0);
+        request = image.requestScreenCapture(10000,0);
         if (!request) {
             request = image.requestScreenCapture(10000,0);
         }
     }
-
     // logd("申请截图结果... "+request)
     if(!request){
         loge("申请截图权限失败,检查是否开启后台弹出,悬浮框等权限")
@@ -37,8 +35,6 @@ function autoRequestScreenCapture() {
 
 //截取当前屏幕 存入文件 发送服务器
 function  screenshot(){
-
-
 
     sleep(1000);
      let availMen =  parseInt(device.getAvailMem());
@@ -85,15 +81,8 @@ function 截图压缩(filePath, format) {
     if (filePath === undefined || format === undefined) {
         loge("参数错误！请检查参数");
     }
-
-
-
-    // logd("申请截图结果... " + request)
-
-
     //申请完权限等1s再截图,否则会截不到图
     sleep(4000)
-
     //  最后的参数 30 是质量 根据自己需求修改 。 1080屏幕 50即可 我这里是2K屏
     // logd("分辨率为："+w+"X"+h);
     let d = image.captureScreenBitmap(format, -1, -1,-1   , -1, 10);
@@ -132,7 +121,6 @@ function  uploadScreenImg(url,filePath){
         "Accept-Encoding": "gzip",
         "User-Agent": "okhttp/3.12.1",
     }
-
     let file =[{
         "key": "file",
         "fileName": "tmp.png",
@@ -143,15 +131,12 @@ function  uploadScreenImg(url,filePath){
     let mid2 = utils.dataMd5(''+ui.getConfig("roomId")+ui.getConfig("videoName")+device.tcDeviceId()+ui.getConfig("deviceNickName")+mid1+time+"sb1314520sbNB$")
      url=url+"?roomId="+ui.getConfig("roomId")+"&videoName="+ui.getConfig("videoName")+"&deviceId="+device.tcDeviceId()+ui.getConfig("deviceNickName")+"&time="+time+
          "&mid1="+mid1+"&mid2="+mid2;
-
     let params = {
         "url": url,
         "method": "post",
         "file":file
     };
-    let x = http.request(params);
-
-    // console.log(x.body)
+    http.request(params);
 
 }
 

@@ -2,49 +2,27 @@ function check10Time(videoName, dieTime,type) {
     videoName = videoName + ''
     let onLineTime = new Date().getMinutes();
     let state =0;
-
     // 按照设定时长
 //     1696199317079
-
     while (true) {
-
         //检查弹出窗
         thread.execAsync(function() {
+            let t=  textMatch("恭喜获得|看视频立即领取|新人限时专享").getOneNodeInfo(2000);
+            if (t) {click(clickable(true).drawingOrder(0).depth(19).index(4))}
 
-            let is_gard=  textMatch("恭喜获得|看视频立即领取|新人限时专享").getOneNodeInfo(2000);
-            if (is_gard) {
-                click(clickable(true).drawingOrder(0).depth(19).index(4))
-            }
+            t = textMatch("直播已结束").getOneNodeInfo(2000)
+            if (t) {videoDieOut = true}
 
-            let videoOver = textMatch("直播已结束").getOneNodeInfo(2000)
-            if (videoOver) {
-               videoDieOut = true
-            }
+            t = textMatch("暂不开启|暂不使用").getOneNodeInfo(1000)
+            if  (t) {t.click();}
 
-            let zanbukaiqi = textMatch("暂不开启|暂不使用").getOneNodeInfo(1000)
-            if  (zanbukaiqi) {
-                zanbukaiqi.click();
-            }
+            t = textMatch("放弃优惠").getOneNodeInfo(1000)
+            if  (t) {t.click();}
 
-            let fangqiyouhui = textMatch("放弃优惠").getOneNodeInfo(1000)
-            if  (fangqiyouhui) {
-                fangqiyouhui.click();
-            }
-
-            let shengJiBanBen =  textMatch("升级版本").getOneNodeInfo(1000)
-            if (shengJiBanBen) {
-                desc("关闭").drawingOrder(1).getOneNodeInfo(2000).click()
-            }
+            t =  textMatch("升级版本").getOneNodeInfo(1000)
+            if (t) {desc("关闭").drawingOrder(1).getOneNodeInfo(2000).click()}
         })
-
         sleep(10000);
-        //名字定位指定的人
-        //有礼物表示在直播间内
-        /*
-        * 头条旧版 clz("android.widget.ImageView").id("com.bytedance.android.openlive.plugin:id/animated_icon").drawingOrder(4).depth(18).index(0)
-        *
-        * 改用采用 查找在线观众
-        * */
 
         let onLinePeople = descMatch(".*在线观众").getOneNodeInfo(5000)
 
@@ -91,9 +69,7 @@ function check10Time(videoName, dieTime,type) {
             }
         }
     }
-
     console.log("时间到了")
-
     return true;
 }
 

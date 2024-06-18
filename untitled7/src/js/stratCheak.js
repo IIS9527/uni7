@@ -8,50 +8,28 @@ function startIntIt(){
     importClass(android.os.PowerManager)
     device.keepAwake(PowerManager.SCREEN_DIM_WAKE_LOCK|PowerManager.ACQUIRE_CAUSES_WAKEUP);
     device.keepScreenOn();
-    if (daemonEnv(true)) {
-        logi("启动守护自动化环境")
-    } else {
-        loge("启动守护自动化环境失败");
-    }
+    if (daemonEnv(true)) {logi("启动守护自动化环境")}
+    else {loge("启动守护自动化环境失败");}
     setSaveLog(true,"/sdcard/aaa/",1024*1024)
-
-
 
     let result = setFetchNodeMode(2, false, true, "bfs");
     logi("result1:" + result);
 
     // 运行模式
-    if ( ui.isAccMode()) {
-        // console.log("无障碍模式")
-        toast("无障碍模式")
-    }
+    if ( ui.isAccMode()) {toast("无障碍模式")}
 
-    if ( ui.isAgentMode()) {
-        console.log("代理模式")
-        toast("代理模式")
-    }
-
+    if ( ui.isAgentMode()) {console.log("代理模式");toast("代理模式")}
     //判断参数
     let cardNo =ui.getConfig("cardNo")+'';
-    if (!cardNo) {
-        console.log("请输入账号")
-        toast("请输入账号")
-        return false
-    }ui.saveConfig("cardNo",cardNo)
+    if (!cardNo) {console.log("请输入账号");toast("请输入账号");return false}
+    ui.saveConfig("cardNo",cardNo)
 
     let password =ui.getConfig("password")+'';
-    if (!password) {
-        console.log("请输入密码")
-        toast("请输入密码")
-        return false
-    } ui.saveConfig("password",password)
+    if (!password) {console.log("请输入密码");toast("请输入密码");return false}
+    ui.saveConfig("password",password)
 
     let personAddress =ui.getConfig("personAddress")+'';
-    if (!personAddress) {
-        console.log("请输入个人链接")
-        toast("请输入个人链接")
-        return false
-    }
+    if (!personAddress) {console.log("请输入个人链接");toast("请输入个人链接");return false}
     else {
         ui.saveConfig("personAddress",personAddress)
         let personName =   getPersonInfo(personAddress)

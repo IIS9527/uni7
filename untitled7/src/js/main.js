@@ -21,146 +21,92 @@
  *
  */
 
-
-
-// APP_ID
-// 头条6822
-// 番茄 6106
-// 西瓜247160
 var projectAppInfo= {
     "xigua":{"app_id":247160 ,"pkgName":"com.ss.android.article.video" ,"activity":"com.ixigua.feature.live.livelite.LiveLiteActivity","activityOld":"com.ixigua.openliveplugin.live.LivePlayerActivity"},
     "toutiao":{"app_id":6822,"pkgName":"com.ss.android.article.news","activity":"com.bytedance.android.openlive.plugin.LivePlayerActivity"},
     "fanqie":{"app_id":6106,"pkgName":"com.xs.fm","activity":"com.dragon.read.plugin.live.LivePlayerActivity"}
 }
-
-
-var Working = false;
-
+var Working = false;//是否在直播间
 var stopWork = false;
-
-var videoDieOut = false;
-
-var erroTimes = 0
-
-var myCome = null  // xx来了
-// const GlobAddress=  "http://192.168.0.100:8999"
-// const GlobAddress1=  "http://192.168.0.100:8999"
-// const GlobAddress2=  "http://192.168.0.100:8999"
-// const GlobAddress=  "http://kpidc.top:8999"
-const GlobAddress=  "http://work.spbigidc.net:9100"
-const GlobAddress1=  "http://work.spbigidc.net:9100"
-// const GlobAddress1=  "http://23.224.174.155:8999"
-const GlobAddress2=  "http://work.spbigidc.net:9100"
-// const GlobAddress2=  "http://nb.keep-work.com"
-
-var checkTimes = 1
+var videoDieOut = false;//直播结束标志
+var erroTimes = 0;
+var myCome = null  // xx来了标志
+const GlobAddress=  "http://work.spbigidc.net:9100";
+const GlobAddress1=  "http://work.spbigidc.net:9100";
+const GlobAddress2=  "http://work.spbigidc.net:9100";
+var checkTimes = 1;
 //jin ru zhi bo jian chu cuo ci shu
-var comeBreakTimes=0
-
-const PKGName = "Cn.kuwo.player"
-
-// const GlobAddress = "http://192.168.137.1:8999"
-
+var comeBreakTimes=0;
+const PKGName = "Cn.kuwo.player";
 function main() {
-
-    if (!login()) {
-        toast("账密错误");
-        exit();
-    }
-
-
+    if (!login()) {toast("账密错误");exit();}
     //初始化设置
-    if (!startIntIt()) {
-       toast("初始化错误");
-       exit();
-    }
-
+    if (!startIntIt()) {toast("初始化错误");exit();}
     console.log("初始化完成")
-    // console.log(ui.getConfig("personName"),ui.getConfig("openType"),ui.getConfig("time"))
-
-while(true) {
-
-    //获取请求服务器，获取任务
-    logi("运行中...")
-
-
-
-    if (getTask()) {
-
-        //刷新悬浮窗
-        //回到主页函数
-        home();
-        setFixedViewText("版本号："+ui.getConfig("version")+"\n"+"抖音昵称:"+ui.getConfig("personName")+"  机器编码："+ui.getConfig("deviceNickName")+" 直播名称"+ui.getConfig("videoName")+" 时长:还未进入直播间")
-        videoDieOut = false;
-        stopWork = false;
-        Working = false;
-        erroTimes =0;
-        myCome = null
-
-        console.log("获取请求成功,开始执行主任务")
-
-        if (!isServiceOk()) {
-            if (activeSelf(0,10000)+'' === "激活成功") {
-                agentEvent.execShellCommandEx("am force-stop   com.ss.android.article.video ")
-                agentEvent.execShellCommandEx("am force-stop   com.ss.android.article.news ")
-                agentEvent.execShellCommandEx("am force-stop   com.xs.fm ")
+    while(true) {
+        //获取请求服务器，获取任务
+        logi("运行中...")
+        if (getTask()) {
+            //任务初始化
+            //刷新悬浮窗
+            //回到主页函数
+            home();
+            setFixedViewText("版本号："+ui.getConfig("version")+"\n"+"抖音昵称:"+ui.getConfig("personName")+"  机器编码："+ui.getConfig("deviceNickName")+" 直播名称"+ui.getConfig("videoName")+" 时长:还未进入直播间")
+            videoDieOut = false;
+            stopWork = false;
+            Working = false;
+            erroTimes =0;
+            myCome = null
+            console.log("获取请求成功,开始执行主任务")
+            if (!isServiceOk()) {
+                if (activeSelf(0,10000)+'' === "激活成功") {
+                    agentEvent.execShellCommandEx("am force-stop   com.ss.android.article.video ");
+                    agentEvent.execShellCommandEx("am force-stop   com.ss.android.article.news ");
+                    agentEvent.execShellCommandEx("am force-stop   com.xs.fm ");
+                }
             }
-        }
-    }
-    else {
-
-        logi("等待服务器发送任务");
-
-        sleep(15000);
-
-        continue;
-
-    }
-
-    //线程一 主任务app 执行脚本
-    let tidMain = mainTaskThread();
-
-    //进入任务 主线程每十秒返回任务执行情况
-    sleep(1000);
-    while (true) {
-        if (!thread.isCancelled(tidMain)) {
-                heartbeat(tidMain)
         }
         else {
-            Working = false;
-            console.log("主任务关闭，等待服务器发送任务")
-            back();
-            sleep(1000)
-            back();
-            sleep(1000)
-            if (home()) {
-                back();
-                sleep(200);
-                back();
-                sleep(200);
-                back();
-                sleep(200);
-                back();
-                sleep(200);
-                back();
-            }
-
-
-            sleep(4000);
-            closeAppXiFaTo(null,ui.getConfig("appId"))
-            sleep(2000)
-            ui.showLogWindow();
-            sleep(1000);
-            thread.stopAll();  //取消所有正在运行的线程
-
-            break;
-
+            logi("等待服务器发送任务");
+            sleep(15000);
+            continue;
         }
-
-        sleep(10000)
-
+        //线程一 主任务app 执行脚本
+        let tidMain = mainTaskThread();
+        //进入任务 主线程每十秒返回任务执行情况
+        sleep(1000);
+        //第二循环  检测任务
+        while (true) {
+            if (!thread.isCancelled(tidMain)) {heartbeat(tidMain);}
+            else {
+                Working = false;
+                console.log("主任务关闭，等待服务器发送任务")
+                back();
+                sleep(1000)
+                back();
+                sleep(1000)
+                if (home()) {
+                    back();
+                    sleep(200);
+                    back();
+                    sleep(200);
+                    back();
+                    sleep(200);
+                    back();
+                    sleep(200);
+                    back();
+                }
+                sleep(4000);
+                closeAppXiFaTo(null,ui.getConfig("appId"))
+                sleep(2000)
+                ui.showLogWindow();
+                sleep(1000);
+                thread.stopAll();  //取消所有正在运行的线程
+                break;
+            }
+            sleep(10000)
+        }
+        sleep(5000)
     }
-    sleep(5000)
-}
 }
 main();

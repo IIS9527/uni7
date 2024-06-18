@@ -6,15 +6,12 @@ function fanqie1(personName, videoName, dieTime) {
     thread.execAsync(function() {
      let is_gard=  textMatch("恭喜获得|看视频立即领取").getOneNodeInfo(2000);
      if (is_gard) {
-
          click(clickable(true).drawingOrder(0).depth(19).index(4))
-
     }})
 
     //判断是否在指定直播间，和显示某某来了
     let node = waitExistNode(textMatch(".*" + personName + ".*"), 15000);
     //是在指定直播间且显示某某来了  每十秒判断是不是还在指定直播间
-
     if (node) {
         if (has(textMatch(".*"+videoName+".*"))) {
 
@@ -24,7 +21,6 @@ function fanqie1(personName, videoName, dieTime) {
             check10Time(videoName, dieTime);
         }
     }
-
     //没有显示某某来了也不确定进入指定直播间
     else {
         // 情况1 直播间链接过期或者直播间找不到我来了
@@ -36,23 +32,17 @@ function fanqie1(personName, videoName, dieTime) {
         }
         //情况2 上下滑动操作 确认进入指定直播间操作  进入指定直播间
         if (checkCome(personName, videoName)) {
-
             screenshot();
             //每十秒判断在指定直播间
             check10Time(videoName, dieTime)
             //结束退出
             return true;
-
         }
         else  {//方式一进入无法找到进入方式二
             // logd("切换方式二");
             // fanqie2(personName, videoName, dieTime)
-
-
             closeAppXiFaTo(projectAppInfo.fanqie.pkgName,null)
-
             utils.openApp(PKGName)
-
             let m =  {
                 "show":true,
                 "x": 0,
@@ -61,24 +51,17 @@ function fanqie1(personName, videoName, dieTime) {
                 "h": device.getScreenHeight()/2,
                 "textSize": 14,
             }
-
             setLogViewSizeEx(m);
-
             loge("账号不活跃停止运行账号不活跃停止运行账号不活跃停止运行");
             loge("找不到对应直播间，或其他未知错误,下面执行关闭app操作");
             ui.showLogWindow();
             sleep(1000);
             exit();
-
-
         }
-
         //操作失败，找不到对应直播间
         loge("找不到直播间，未知错误")
-
     }
     //不在指定直播间
-
 }
 
 
