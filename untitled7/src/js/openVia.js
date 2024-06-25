@@ -119,7 +119,6 @@ function openApp(appId){
         utils.openActivity(map);
         sleep(1000);
 
-
     }
     node1= textMatch("确定|允许").getOneNodeInfo(1000)
     if (node1) {node1.click()}

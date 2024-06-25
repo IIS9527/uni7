@@ -170,25 +170,21 @@ function xiguacheck(nickName,videoName,dieTime){
      let node1 = null;
      nickName = nickName+''
      videoName = videoName+''
-    thread.execAsync(
-        function() {
-                let t = textMatch("送我一个小心心吧 ").getOneNodeInfo(2000)
-                if (t) {clickPoint(device.getScreenWidth()/2,device.getScreenHeight()/2)}
-                t = textMatch(".*暂不开启.*").getOneNodeInfo(1000)
-                if (t) {t.click();}
-                t = textMatch("放弃优惠").getOneNodeInfo(1000)
-                if (t) {fangqiyouhui.click();}
-    })
-    thread.execAsync(
-        function() {
+     thread.execAsync(
+function() {
+            let t = textMatch("送我一个小心心吧 ").getOneNodeInfo(2000)
+            if (t) {clickPoint(device.getScreenWidth()/2,device.getScreenHeight()/2)}
+            t = textMatch(".*暂不开启.*").getOneNodeInfo(1000)
+            if (t) {t.click();}
+            t = textMatch("放弃优惠").getOneNodeInfo(1000)
+            if (t) {fangqiyouhui.click();}
             if (has(text(videoName)) && has(textMatch(".*后进入下场直播.*"))) {
                 toast("直播结束");
                 loge("直播结束");
                 videoDieOut = true
                 ui.showLogWindow();
             }
-        })
-
+     })
     if (myCome || textMatch(".*" + changeSpecialChar(nickName) + " 来了").getOneNodeInfo(15000)) {
             //先截图
             screenshot()
@@ -207,7 +203,6 @@ function xiguacheck(nickName,videoName,dieTime){
             //结束退出
         }
         else {
-
             // xigua2(nickName,videoName,dieTime)
             //回到主页
             closeAppXiFaTo(projectAppInfo.xigua.pkgName,null)
@@ -241,45 +236,32 @@ function xiGuaStartThread6(videoNameXiGua,videoName){
     sleep(3000);
     clickAllow()
     sleep(5000);
-    thread.execAsync(function () {
-        let t = textMatch("送我一个小心心吧 ").getOneNodeInfo(2000)
-        if (t) {
-            clickPoint(device.getScreenWidth() / 2, device.getScreenHeight() / 2)
-        }
-        t = textMatch(".*暂不开启.*").getOneNodeInfo(2000)
-        if (t) {
-            t.click();
-        }
-        t = textMatch("放弃优惠").getOneNodeInfo(1000)
-        if (t) {
-            t.click();
-        }
-    })
+    node1 = textMatch("送我一个小心心吧 ").getOneNodeInfo(2000)
+    if (node1) {clickPoint(device.getScreenWidth() / 2, device.getScreenHeight() / 2)}
 
-    sleep(3000);
+    node1 = textMatch(".*暂不开启.*").getOneNodeInfo(2000)
+    if (node1) {node1.click();}
 
+    node1 = textMatch("放弃优惠").getOneNodeInfo(1000)
+    if (node1) {node1.click();
+    }
     node1 = id("com.ss.android.article.video:id/hx").getOneNodeInfo(3000);
     if (node1) {node1.clickCenter();}
 
     sleep(2000)
     let selectors = id("com.ss.android.article.video:id/gr");
-
     let result = (videoNameXiGua == "" || videoNameXiGua == null ) ? inputText(selectors, videoName) :inputText(selectors,videoNameXiGua);
-
     sleep(1000);
-
 
     if (result) {
         text("搜索").getOneNodeInfo(5000).click();
     } else {
-
         id("com.ss.android.article.video:id/hx").getOneNodeInfo(2000).clickCenter();
         sleep(2000)
         let selectors = id("com.ss.android.article.video:id/gr");
         videoNameXiGua == ""? inputText(selectors, videoName) :inputText(selectors,videoNameXiGua);
         sleep(1000);
         text("搜索").getOneNodeInfo(5000).click();
-
     }
     sleep(2000);
     text("直播").getOneNodeInfo(2000).click()
@@ -307,19 +289,17 @@ function xiGuaStartThread6_HuaWei(videoNameXiGua,videoName){
     sleep(3000);
     clickAllow()
     sleep(4000);
-    thread.execAsync(function () {
-        let t = textMatch("送我一个小心心吧 ").getOneNodeInfo(2000)
-        if (t) {clickPoint(device.getScreenWidth() / 2, device.getScreenHeight() / 2)}
 
-        t = textMatch(".*暂不开启.*").getOneNodeInfo(2000)
-        if (t) {t.click();}
+    node1 = textMatch("送我一个小心心吧 ").getOneNodeInfo(2000)
+    if (node1) {clickPoint(device.getScreenWidth() / 2, device.getScreenHeight() / 2)}
 
-        t = textMatch("放弃优惠").getOneNodeInfo(1000)
-        if (t) {t.click();}
-    })
-    sleep(3000);
+    node1 = textMatch(".*暂不开启.*").getOneNodeInfo(2000)
+    if (node1) {node1.click();}
 
-    node1=  desc("编辑频道").getOneNodeInfo(8000)
+    node1 = textMatch("放弃优惠").getOneNodeInfo(1000)
+    if (node1) {node1.click();}
+
+    node1=  desc("编辑频道").getOneNodeInfo(6000)
     if (node1) {node1.click();}
     sleep(3000);
 

@@ -163,7 +163,6 @@ function touTiaoThread6(videoName){
 
 function touTiaoThread7(videoNameTouTiao){
 
-
     if (videoNameTouTiao == null || videoNameTouTiao === '' ) {
         loge("头条作品id未填写或填写错误")
         return false;
@@ -189,7 +188,6 @@ function touTiaoThread7(videoNameTouTiao){
     sleep(15000)
 
     for (let i = 0; i < 4; i++) {
-
     let selector2 = descMatch(".*头像.*").drawingOrder(1).getOneNodeInfo(6000)
     if(selector2){
         click( descMatch(".*头像.*").drawingOrder(1))

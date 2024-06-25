@@ -61,7 +61,9 @@ function main() {
             if (!isServiceOk()) {
                 if (activeSelf(0,10000)+'' === "激活成功") {
                     agentEvent.execShellCommandEx("am force-stop   com.ss.android.article.video ");
+                    sleep(500);
                     agentEvent.execShellCommandEx("am force-stop   com.ss.android.article.news ");
+                    sleep(500);
                     agentEvent.execShellCommandEx("am force-stop   com.xs.fm ");
                 }
             }
@@ -77,7 +79,10 @@ function main() {
         sleep(1000);
         //第二循环  检测任务
         while (true) {
-            if (!thread.isCancelled(tidMain)) {heartbeat(tidMain);}
+            if (!thread.isCancelled(tidMain)) {
+                heartbeat(tidMain);
+                sleep(10000)
+            }
             else {
                 Working = false;
                 console.log("主任务关闭，等待服务器发送任务")
@@ -85,26 +90,23 @@ function main() {
                 sleep(1000)
                 back();
                 sleep(1000)
-                if (home()) {
-                    back();
-                    sleep(200);
-                    back();
-                    sleep(200);
-                    back();
-                    sleep(200);
-                    back();
-                    sleep(200);
-                    back();
-                }
+                home()
+                sleep(1000)
+                back();
+                sleep(1000);
+                back();
+                sleep(1000);
+                back();
+                sleep(1000);
+                back();
                 sleep(4000);
                 closeAppXiFaTo(null,ui.getConfig("appId"))
-                sleep(2000)
+                sleep(2000);
                 ui.showLogWindow();
                 sleep(1000);
                 thread.stopAll();  //取消所有正在运行的线程
                 break;
             }
-            sleep(10000)
         }
         sleep(5000)
     }

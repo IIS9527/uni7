@@ -1,4 +1,5 @@
 function check10Time(videoName, dieTime,type) {
+    let node1 = null;
     videoName = videoName + ''
     let onLineTime = new Date().getMinutes();
     let state =0;
@@ -6,27 +7,24 @@ function check10Time(videoName, dieTime,type) {
 //     1696199317079
     while (true) {
         //检查弹出窗
-        thread.execAsync(function() {
-            let t=  textMatch("恭喜获得|看视频立即领取|新人限时专享").getOneNodeInfo(2000);
-            if (t) {click(clickable(true).drawingOrder(0).depth(19).index(4))}
 
-            t = textMatch("直播已结束").getOneNodeInfo(2000)
-            if (t) {videoDieOut = true}
+        node1=  textMatch("恭喜获得|看视频立即领取|新人限时专享").getOneNodeInfo(2000);
+        if (node1) {click(clickable(true).drawingOrder(0).depth(19).index(4))}
 
-            t = textMatch("暂不开启|暂不使用").getOneNodeInfo(1000)
-            if  (t) {t.click();}
+        node1 = textMatch("直播已结束").getOneNodeInfo(2000)
+        if (node1) {videoDieOut = true}
 
-            t = textMatch("放弃优惠").getOneNodeInfo(1000)
-            if  (t) {t.click();}
+        node1 = textMatch("暂不开启|暂不使用").getOneNodeInfo(1000)
+        if  (node1) {node1.click();}
 
-            t =  textMatch("升级版本").getOneNodeInfo(1000)
-            if (t) {desc("关闭").drawingOrder(1).getOneNodeInfo(2000).click()}
-        })
-        sleep(10000);
+        node1 = textMatch("放弃优惠").getOneNodeInfo(1000)
+        if  (node1) {node1.click();}
 
-        let onLinePeople = descMatch(".*在线观众").getOneNodeInfo(5000)
+        node1 =  textMatch("升级版本").getOneNodeInfo(1000)
+        if (node1) {desc("关闭").drawingOrder(1).getOneNodeInfo(2000).click()}
 
-        if (onLinePeople && waitExistNode(text(videoName), 5000)) {
+        node1 = descMatch(".*在线观众").getOneNodeInfo(5000)
+        if (node1 && waitExistNode(text(videoName), 5000)) {
             Working = true;
             checkTimes = 0;
             setFixedViewText("版本号："+ui.getConfig("version")+"\n"+"抖音昵称:" + ui.getConfig("personName") + "  机器编码:" + ui.getConfig("deviceNickName")
@@ -69,8 +67,6 @@ function check10Time(videoName, dieTime,type) {
             }
         }
     }
-    console.log("时间到了")
-    return true;
 }
 
 
@@ -233,28 +229,27 @@ function checkCome(personName,videoName){
     let j = 1
 
     for (; j <= 1; j++) {
-
         if (centerswipUp()) {
             //弹窗检测
             sleep(2000);
             thread.execAsync(function() {
-                let fangqiyouhui = textMatch("放弃优惠").getOneNodeInfo(1000)
-                if (fangqiyouhui) {
-                    fangqiyouhui.click();
+                let t = textMatch("放弃优惠").getOneNodeInfo(1000)
+                if (t) {
+                    t.click();
                 }
 
-                let node = textMatch("开心收下").getOneNodeInfo(1000)
-                if (node) {
+               t = textMatch("开心收下").getOneNodeInfo(1000)
+                if (t) {
                     clickPoint(device.getScreenWidth() / 2, device.getScreenHeight() / 2)
                 }
 
-                let zanbukaiqi = textMatch("暂不开启|暂不使用").getOneNodeInfo(1000)
-                if (zanbukaiqi) {
-                    zanbukaiqi.click();
+                t = textMatch("暂不开启|暂不使用").getOneNodeInfo(1000)
+                if (t) {
+                    t.click();
                 }
 
-                let shengJiBanBen = textMatch("升级版本").getOneNodeInfo(1000)
-                if (shengJiBanBen) {
+                t = textMatch("升级版本").getOneNodeInfo(1000)
+                if (t) {
                     desc("关闭").drawingOrder(1).getOneNodeInfo(2000).click()
                 }
             })
@@ -263,23 +258,16 @@ function checkCome(personName,videoName){
         else {
             centerswipUp()
         }
-
         sleep(random(3000,4000));
     }
     for (; j >= 0; j--) {
-
         centerswipDown();
-
         if(textMatch(".*" + personName + " 来了").getOneNodeInfo(15000) && text(videoName).getOneNodeInfo(15000)) {
             return true;
         }
-
         sleep(3000);
-
     }
-
     return false;
-
 }
 //取消关注函数
 function  chancelConcern(videoName){

@@ -124,7 +124,6 @@ function heartbeat(tid){
     let  address  = GlobAddress+"/Task/checkState?mid="+ utils.dataMd5(p.cardNo+p.deviceId+p.roomId+p.time+p.videoDieOut+p.taskState+p.id+"sb1314520sbNB$");
     try{
         let assignment = http.postJSON(address,p,1000*5,null)
-        //假设直播间状态为在线
         videoDieOut = false;
         if (assignment) {
             assignment=JSON.parse(assignment);
