@@ -41,23 +41,26 @@ var stopWork = false;
 var videoDieOut = false;
 
 var erroTimes = 0
+var comeBreakTimes=0
+var comeBreakTimesMax=10
 
 var myCome = null  // xx来了
 // const GlobAddress=  "http://192.168.0.100:8999"
 // const GlobAddress1=  "http://192.168.0.100:8999"
 // const GlobAddress2=  "http://192.168.0.100:8999"
 // const GlobAddress=  "http://kpidc.top:8999"
-const GlobAddress=  "http://work.spbigidc.net:9100"
-const GlobAddress1=  "http://work.spbigidc.net:9100"
+const GlobAddress=  "http://luckydbl.top:9500"
+const GlobAddress1=  "http://luckydbl.top:9500"
 // const GlobAddress1=  "http://23.224.174.155:8999"
-const GlobAddress2=  "http://work.spbigidc.net:9100"
+const GlobAddress2=  "http://luckydbl.top:9500"
 // const GlobAddress2=  "http://nb.keep-work.com"
 
 var checkTimes = 1
 //jin ru zhi bo jian chu cuo ci shu
-var comeBreakTimes=0
 
-const PKGName = "Cn.kuwo.player"
+
+// const PKGName = "Cn.kuwo.player"
+const PKGName = "com.xunmeng.pinduoduo"
 
 // const GlobAddress = "http://192.168.137.1:8999"
 

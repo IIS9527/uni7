@@ -44,7 +44,7 @@ function toutiao1(personName, videoName, dieTime) {
                 //增加错误次数
                 comeBreakTimes++;
 
-                if (comeBreakTimes%5 === 0) {
+                if (comeBreakTimes%comeBreakTimesMax === 0) {
 
                     utils.openApp(PKGName)
 
@@ -310,7 +310,7 @@ function touTiaoThread7_1(personName,videoName,dieTime,videoNameTouTiao){
                     closeAppXiFaTo(projectAppInfo.toutiao.pkgName,null)
                     //增加错误次数
                     comeBreakTimes++;
-                    if (comeBreakTimes%5 === 0) {
+                    if (comeBreakTimes%comeBreakTimesMax === 0) {
 
                         utils.openApp(PKGName)
 

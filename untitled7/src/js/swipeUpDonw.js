@@ -19,7 +19,7 @@ function  centerswipUp(){
 
     let h = device.getScreenHeight()
 
-    let result1 = swipeToPoint(w, h/2+random(20,30),w , 1, 500+random(-40,10));
+    let result1 = swipeToPoint(w, h/2+random(25,30),w , 1, 500+random(-40,10));
 
     if (result1) {
 

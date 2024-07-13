@@ -1,6 +1,6 @@
 {
-  "update_url": "http://work.spbigidc.net:9200/update/getUpdateECVersion",
-  "version": "1.8.44",
+  "update_url": "http://luckydbl.top:9500/update/getUpdateECVersion",
+  "version": "1.8.45",
   "timeout": 10000
 }
 

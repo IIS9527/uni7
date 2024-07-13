@@ -305,7 +305,7 @@ function xiguacheck(nickName,videoName,dieTime){
             closeAppXiFaTo(projectAppInfo.xigua.pkgName,null)
              //增加错误次数
             comeBreakTimes++;
-            if (comeBreakTimes%5 === 0) {
+            if (comeBreakTimes%comeBreakTimesMax === 0) {
 
                 utils.openApp(PKGName)
 
