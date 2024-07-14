@@ -1,71 +1,44 @@
 function closeAPP(pkgName) {
-
-
     pkgName=pkgName+''
-
-
     back();
-
     sleep(2000)
-
-
     if (isAgentMode()) {
-
         if (shell.stopApp(pkgName)) {
-         return true;
+            return true;
+        } else {
+            loge("agent model shell.stopApp close app false");
+            return false;
         }
-        else {
-
-
-
-
-        }
-
     }
-
-
     utils.openActivity({
         "action": "android.settings.APPLICATION_DETAILS_SETTINGS",
         "uri": "package:" + pkgName
     });
-    // utils.openActivity()
-    // console.log(pkgName)
-    // console.log(getRunningPkg(),"开始执行关闭app操作")
-    // try {
-    //     importClass(android.content.Intent);
-    //     importClass(android.net.Uri)
-    //     //let pkgName = getRunningPkg().toString();
-    //     let intent = new Intent();
-    //     intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
-    //     let uri = Uri.parse("package:" + pkgName);
-    //     intent.setData(uri);
-    //     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    //     context.startActivity(intent);
-    // } catch (e) {
-    //     loge(e)
-    // }
     sleep(8000)
-   let is_sure=  textMatch("结束进程|结束运行|强行停止|强行结束|强制停止|强制结束");
-
-    // let is_sure = textMatch(".*强.*|.*停.*|.*结.*|.*行.*").getOneNodeInfo(1000).click();
-    let issure = is_sure.getOneNodeInfo(6000);
+    let is_sure=  textMatch("结束进程|结束运行|强行停止|强行结束|强制停止|强制结束");
     sleep(2000);
-
-    if ( issure ) {
-        let resl = clickRandom(is_sure);
-        sleep(2000)
-        logi(resl + "");
-        click(clickable(true).textMatch(".*确.*|.*定.*|强制停止|结束进程|结束运行|强行停止"));
+    if ( is_sure.getOneNodeInfo(6000) ) {
+        if (!clickRandom(is_sure)){
+           loge("acc model clickRandom false;");
+           return false;
+        }
+        sleep(3000)
+        if (click(clickable(true).textMatch(".*确.*|.*定.*|强制停止|结束进程|结束运行|强行停止"))){
+           loge("acc model click false;");
+           return false;
+        }
         sleep(2000);
         home();
         sleep(2000);
         back();
-        console.log("关闭成功")
-    } else {
+        logi("关闭成功");
+        return true;
+    }
+    else {
         loge(pkgName + "应用不能被正常关闭或不在后台运行,关闭应用失败");
         back();
+        return false;
     }
-
 }
 
 function closeAppXiFaTo(pkgName,appId){
