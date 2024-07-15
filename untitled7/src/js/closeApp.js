@@ -23,7 +23,7 @@ function closeAPP(pkgName) {
            return false;
         }
         sleep(3000)
-        if (click(clickable(true).textMatch(".*确.*|.*定.*|强制停止|结束进程|结束运行|强行停止"))){
+        if (!click(clickable(true).textMatch(".*确.*|.*定.*|强制停止|结束进程|结束运行|强行停止"))){
            loge("acc model click false;");
            return false;
         }

@@ -197,6 +197,9 @@ function  changeSpecialChar(str){
         else if (str[i] === '#') {
             changeStr = changeStr +'\#'
         }
+        else if (str[i] === '^') {
+            changeStr = changeStr +'\^'
+        }
        else {
             changeStr = changeStr + str[i]
         }
