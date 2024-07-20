@@ -1,39 +1,45 @@
 //打开方式1 不点击关注
 function fanqie1(personName, videoName, dieTime) {
+    let node1 = null;
     personName = personName + ''
     videoName  = videoName + ''
 
     thread.execAsync(function() {
-     let is_gard=  textMatch("恭喜获得|看视频立即领取").getOneNodeInfo(2000);
-     if (is_gard) {
+     let t=  textMatch("恭喜获得|看视频立即领取").getOneNodeInfo(2000);
+     if (t) {
          click(clickable(true).drawingOrder(0).depth(19).index(4))
-    }})
+    }
+        t = textMatch(".*暂不开启.*").getOneNodeInfo(1000)
+        if (t) {t.click();}
+        t = textMatch("放弃优惠").getOneNodeInfo(1000)
+        if (t) {fangqiyouhui.click();}
+     if (has(text(videoName)) && has(textMatch(".*后进入下场直播.*"))) {
+         toast("直播结束");
+         loge("直播结束");
+         videoDieOut = true
+         ui.showLogWindow();
+        }
+    })
 
     //判断是否在指定直播间，和显示某某来了
-    let node = waitExistNode(textMatch(".*" + personName + ".*"), 15000);
     //是在指定直播间且显示某某来了  每十秒判断是不是还在指定直播间
-    if (node) {
-        if (has(textMatch(".*"+videoName+".*"))) {
-
+    if (myCome||textMatch(".*" + changeSpecialChar(nickName) + " 来了").getOneNodeInfo(15000)) {
             // console.log("进入直播间")
             //先截图
             screenshot()
+            comeBreakTimes =0;
             check10Time(videoName, dieTime);
-        }
     }
     //没有显示某某来了也不确定进入指定直播间
     else {
         // 情况1 直播间链接过期或者直播间找不到我来了
         // console.log("找不到直播间或某某来了重新尝试")
-        if (has(textMatch(".*s后进入下场直播.*")) && has(textMatch(videoName))) {
-            toast("直播结束");
-            console.log("直播结束")
-            return false;
-        }
+
         //情况2 上下滑动操作 确认进入指定直播间操作  进入指定直播间
         if (checkCome(personName, videoName)) {
             screenshot();
             //每十秒判断在指定直播间
+            comeBreakTimes =0;
             check10Time(videoName, dieTime)
             //结束退出
             return true;
@@ -42,7 +48,8 @@ function fanqie1(personName, videoName, dieTime) {
             // logd("切换方式二");
             // fanqie2(personName, videoName, dieTime)
             closeAppXiFaTo(projectAppInfo.fanqie.pkgName,null)
-            utils.openApp(PKGName)
+            comeBreakTimes++;
+            if (comeBreakTimes%5 === 0) {
             let m =  {
                 "show":true,
                 "x": 0,
@@ -57,6 +64,7 @@ function fanqie1(personName, videoName, dieTime) {
             ui.showLogWindow();
             sleep(1000);
             exit();
+        }
         }
         //操作失败，找不到对应直播间
         loge("找不到直播间，未知错误")

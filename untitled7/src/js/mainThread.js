@@ -78,8 +78,9 @@ function mainTaskThread(){
             }
             if (appId == projectAppInfo.fanqie.app_id) {
                 ui.closeLogWindow();
+                sleep(1000);
                 utils.openApp(projectAppInfo.fanqie.pkgName)
-                sleep(3000);
+                sleep(2000);
                 clickAllow()
                 sleep(2000);
                 node1 = text("直播").getOneNodeInfo(10000)
