@@ -31,13 +31,11 @@ var stopWork = false;
 var videoDieOut = false;//直播结束标志
 var erroTimes = 0;
 var myCome = null  // xx来了标志
-const GlobAddress=  "http://work.spbigidc.net:9100";
-const GlobAddress1=  "http://work.spbigidc.net:9100";
-const GlobAddress2=  "http://work.spbigidc.net:9100";
+// const GlobAddress=  "http://work.spbigidc.net:9100";
+// const GlobAddress1=  "http://work.spbigidc.net:9100";
+// const GlobAddress2=  "http://work.spbigidc.net:9100";
 var checkTimes = 1;
-
 var videoDieOut = false;
-
 var erroTimes = 0
 var comeBreakTimes=0
 var comeBreakTimesMax=10
@@ -56,7 +54,7 @@ const GlobAddress2=  "http://luckydbl.top:9500"
 var checkTimes = 1
 //jin ru zhi bo jian chu cuo ci shu
 var comeBreakTimes=0;
-const PKGName = "Cn.kuwo.player";
+const PKGName = "cn.kuwo.player";
 function main() {
     if (!login()) {toast("账密错误");exit();}
     //初始化设置
